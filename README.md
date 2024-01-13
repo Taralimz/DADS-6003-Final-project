@@ -8,12 +8,12 @@
 1. โหลดข้อมูล(Collect Data): นำเข้าชุดข้อมูลที่ได้รับการปรับปรุงและการเลือกคุณลักษณt
 2. แบ่งข้อมูลเป็นชุดฝึกและทดสอบ: ใช้ TimeSeriesSplit แบ่งเป็น 80% สำหรับการฝึก, 20% สำหรับการทดสอบ
 3. ฝึกโมเดลด้วย Cross-Validation: วนลูปผ่านแต่ละโมเดล:
-LGBM
-Gradient Boosting
-Random Forest
-Logistic Regression (L1, L2, Elasticnet)
-GaussianNB
-SVM
+  - LGBM
+  - Gradient Boosting
+  - Random Forest
+  - Logistic Regression (L1, L2, Elasticnet)
+  - GaussianNB
+  - SVM
 โดยแต่ละโมเดลจะนำ CrossValidation TimeSeriesSplit มาใช้เพื่อป้องกันการ overfitting
 ฝึกโมเดลในช่วงการฝึกประเมิน
 4. ปรับปรุงพารามิเตอร์(Hyperparameter Tuning) :ใช้ BayesianOptimization สำหรับการปรับปรุงพารามิเตอร์ที่มีประสิทธิภาพปรับปรุงพารามิเตอร์สำหรับแต่ละโมเดลขึ้นอยู่กับประสิทธิภาพในช่วงการทดสอบ
