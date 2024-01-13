@@ -1,2 +1,20 @@
 # DADS-6003-Final-project
-This project is part of the Applied Machine Learning course using  machine learning for trading. And the same is used to predict stock price movements in Python.
+#Prediction of stock price direction
+โปรเจ็คนี้เป็นการสร้างโมเดลทำนายราคาหุ้นที่คาดว่าจะซื้อหรือขาย (ราคาปิดของ Period ข้างหน้ามากกว่า Period ปัจจุบัน โดย Period ปัจจุบันจะถูกบันทึกว่าต้องซื้อ(1) ) ในทุกๆ 15 นาที กับหุ้น 3 ตัว ได้แก่ ERW, TISCO, SPRC โดยดูจาก feature ข้อมูลการเปลี่ยนแปลงราคาในรอบ 15 นาที ที่สูงที่สุดที่โมเดลทำนายได้ของแต่ละหุ้น โดยข้อมูลที่ใช้ในการ train และ test โมเดลเป็นข้อมูลราคาหุ้น ในอดีตย้อนหลัง ประมาณ 60 วันโดยประมาณ ตั้งแต่ช่วงวันที่ทำการรันข้อมูลหักลบย้อนกลับไป 60 วัน
+
+โดยมีขั้นตอนดังต่อไปนี้
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/31afaccc-034c-4e06-839d-2fa3e9a53009/3f17367f-f672-4158-9eb7-9bb53631f86b/Untitled.png)
+1. โหลดข้อมูล(Collect Data): นำเข้าชุดข้อมูลที่ได้รับการปรับปรุงและการเลือกคุณลักษณt
+2. แบ่งข้อมูลเป็นชุดฝึกและทดสอบ: ใช้ TimeSeriesSplit แบ่งเป็น 80% สำหรับการฝึก, 20% สำหรับการทดสอบ
+3. ฝึกโมเดลด้วย Cross-Validation: วนลูปผ่านแต่ละโมเดล:
+LGBM
+Gradient Boosting
+Random Forest
+Logistic Regression (L1, L2, Elasticnet)
+GaussianNB
+SVM
+โดยแต่ละโมเดลจะนำ CrossValidation TimeSeriesSplit มาใช้เพื่อป้องกันการ overfitting
+ฝึกโมเดลในช่วงการฝึกประเมิน
+4. ปรับปรุงพารามิเตอร์(Hyperparameter Tuning) :ใช้ BayesianOptimization สำหรับการปรับปรุงพารามิเตอร์ที่มีประสิทธิภาพปรับปรุงพารามิเตอร์สำหรับแต่ละโมเดลขึ้นอยู่กับประสิทธิภาพในช่วงการทดสอบ
+5. ประเมินประสิทธิภาพ(Evaluation): ทำการทำนายบนชุดทดสอบที่ถือไว้คำนวณตัวชี้ประสิทธิภาพ (เช่น accuracy, precision, recall, F1-score)
+6. เลือกโมเดล:เปรียบเทียบตัวชี้ประสิทธิภาพระหว่างโมเดลและเลือกโมเดลที่ดีที่สุดตามเกณฑ์การประเมิน
